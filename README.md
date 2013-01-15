@@ -1,4 +1,4 @@
-ndic
+Ndic
 ====
 
 Naver English Dictionary on Command Line
