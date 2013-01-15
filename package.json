@@ -11,5 +11,5 @@
     "ndic": "./ndic.bash"
   },
   "author": "Ohgyun Ahn <ohgyun@gmail.com>",
-  "license": "BSD"
+  "license": "MIT"
 }
