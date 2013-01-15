@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Naver English Dictionary on Command Line",
   "preferGlobal": true,
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ohgyun/ndic.git"
+  },
   "private": true,
   "bin": {
     "ndic": "./ndic.bash"
