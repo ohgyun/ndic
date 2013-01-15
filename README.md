@@ -6,7 +6,9 @@ Naver English Dictionary on Command Line
 
 ## Installation
 
-Use npm: `npm install ndic -g`
+Either through forking or by using npm (the recommended way):
+
+    npm install ndic -g
 
 ## Usage
 
