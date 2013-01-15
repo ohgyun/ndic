@@ -7,7 +7,6 @@
     "type": "git",
     "url": "https://github.com/ohgyun/ndic.git"
   },
-  "private": true,
   "bin": {
     "ndic": "./ndic.bash"
   },
