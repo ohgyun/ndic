@@ -3,16 +3,12 @@
 # ndic <word>
 # Search the word from dictionary
 
-
 if [[ -z "$BASH" ]]; then
   cat >&2 <<MSG
 Ndic is a bash program, and musb be run with bash.
 MSG
   exit 1
 fi
-
-
-dic_url="http://m.endic.naver.com/assistDic.nhn?query="
 
 main () {
   if [[ -z "$1" ]]; then
@@ -40,7 +36,7 @@ print_result () {
     # print result
     echo "${BASH_REMATCH[1]}"
 
-    # delete mathced string
+    # delete matched string
     str=${str/"${BASH_REMATCH}"/}
   done
 }
