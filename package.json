@@ -1,6 +1,6 @@
 {
   "name": "ndic",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Naver English Dictionary on Command Line",
   "preferGlobal": true,
   "repository": {
