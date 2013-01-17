@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# ndic <word>
-# Search the word from dictionary
-
 if [[ -z $BASH ]]; then
   cat >&2 <<MSG
 Ndic is a bash program, and musb be run with bash.
@@ -10,8 +7,11 @@ MSG
   exit 1
 fi
 
+# variables
 word=''
+meanings=()
 is_debug=false
+is_speakable=false
 
 main () {
   if [[ -z $1 ]]; then
@@ -23,15 +23,22 @@ main () {
   OPTIND=1
 
   # parse arguments
-  while getopts 'hd' opt; do
+  while getopts 'hds' opt; do
     case $opt in
       h)
         print_help
         exit 0
         ;;
-      d) is_debug=true
+      d)
+        is_debug=true
         ;;
-      *) echo 'invalid options error...';;
+      s)
+        is_speakable=true
+        ;;
+      *)
+        print_help
+        exit 1
+        ;;
     esac
   done
 
@@ -39,7 +46,9 @@ main () {
 
   debug "WORD: $word"
 
-  search
+  if [[ $word ]]; then
+    search # search only if the word is not empty
+  fi
 }
 
 debug () {
@@ -57,6 +66,7 @@ search () {
   debug "URL: $url"
 
   print_result "$result"
+  speak_word
 }
 
 get_url () {
@@ -71,18 +81,30 @@ print_result () {
   debug "HTML: $str"
 
   while [[ $str =~ $regex ]]; do
-    # print result
+    # print meaning
     echo "${BASH_REMATCH[1]}"
+
+    # store meaning to array
+    meanings+=("${BASH_REMATCH[1]}")
 
     # delete matched string
     str=${str/"${BASH_REMATCH}"/}
   done
 }
 
+speak_word () {
+  # If the results exists and OS is 'Darwin'(Mac), speak the word.
+  if [[ ${is_speakable} = true \
+      && $(uname) =~ Darwin* \
+      && ${#meanings[@]} > 0 ]]; then
+    say "${word}" 2> /dev/null # ignore if error occurred
+  fi
+}
+
 print_help () {
   cat <<MSG
 
-Usage: ndic [-hd] <word>
+Usage: ndic [-hds] <word>
 
 Description:
   Find the meaning of <word> in English-Korean Dictionary.
@@ -91,6 +113,7 @@ Description:
 Options:
   -h  Show help message
   -d  Turn on debug mode
+  -s  Speak the word
 
 Examples:
   $ ndic nice
@@ -99,6 +122,8 @@ Examples:
 
   $ ndic "good thing" # use quotes if a word has spaces
   [구어] 좋은 일; 좋은 착상; 행운; 경구; 진미; 사치품
+
+  $ ndic -s nice # search and speak the word
 
 MSG
 }
