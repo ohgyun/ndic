@@ -7,7 +7,7 @@ English-Korean Dictionary on Command Line
 
 ## Installation
 
-Either through forking or by using npm (the recommended way):
+Install via npm:
 
     npm install ndic -g
 
