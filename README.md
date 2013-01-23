@@ -24,6 +24,7 @@ Install via npm:
       -h  Show help message
       -d  Turn on debug mode
       -s  Speak the word
+      -c  Search by clipboard contents
 
     Examples:
       $ ndic nice
@@ -35,3 +36,4 @@ Install via npm:
 
       $ ndic -s nice # search and speak the word     
 
+      $ ndic -c # search by clipboard contents
