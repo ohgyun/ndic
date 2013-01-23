@@ -1,6 +1,6 @@
 {
   "name": "ndic",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "English-Korean Dictionary on Command Line (Powered by Naver)",
   "preferGlobal": true,
   "repository": {

@@ -23,17 +23,21 @@ main () {
   OPTIND=1
 
   # parse arguments
-  while getopts 'hds' opt; do
+  while getopts 'hdsc' opt; do
     case $opt in
-      h)
+      h) # help
         print_help
         exit 0
         ;;
-      d)
+      d) # turn on debug
         is_debug=true
         ;;
-      s)
+      s) # speak word
         is_speakable=true
+        ;;
+      c) # get the clipboard
+        word=$(pbpaste)
+        echo "$word"
         ;;
       *)
         print_help
@@ -42,7 +46,8 @@ main () {
     esac
   done
 
-  word=${@:$OPTIND}
+  # set word if empty
+  [[ -z "$word" ]] && word=${@:$OPTIND}
 
   debug "WORD: $word"
 
