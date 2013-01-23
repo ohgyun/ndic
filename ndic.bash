@@ -119,6 +119,7 @@ Options:
   -h  Show help message
   -d  Turn on debug mode
   -s  Speak the word
+  -c  Search by clipboard contents
 
 Examples:
   $ ndic nice
@@ -129,6 +130,8 @@ Examples:
   [구어] 좋은 일; 좋은 착상; 행운; 경구; 진미; 사치품
 
   $ ndic -s nice # search and speak the word
+
+  $ ndic -c # search by clipboard contents
 
 MSG
 }
