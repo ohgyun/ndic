@@ -76,12 +76,12 @@ search () {
 
 get_url () {
   # use mobile assistant dictionary
-  echo "http://m.endic.naver.com/assistDic.nhn?query=${word// /%20}"
+  echo "https://endic.naver.com/searchAssistDict.nhn?query=${word// /%20}"
 }
 
 print_result () {
   local str="$1"
-  local regex='<p class="ly_p">([^<]+)</p>'
+  local regex='<span class="fnt_k20"><strong>([^<]+)</strong></span>'
 
   debug "HTML: $str"
 
