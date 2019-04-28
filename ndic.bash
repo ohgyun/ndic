@@ -15,7 +15,7 @@ is_speakable=false
 
 main () {
   if [[ -z $1 ]]; then
-    print_help 
+    print_help
     exit 1
   fi
 
@@ -67,7 +67,7 @@ search () {
 
   url=`get_url`
   result=`curl -s "$url"`
-  
+
   debug "URL: $url"
 
   print_result "$result"
@@ -98,11 +98,18 @@ print_result () {
 }
 
 speak_word () {
-  # If the results exists and OS is 'Darwin'(Mac), speak the word.
-  if [[ ${is_speakable} = true \
-      && $(uname) =~ Darwin* \
-      && ${#meanings[@]} > 0 ]]; then
-    say "${word}" 2> /dev/null # ignore if error occurred
+  # If the results exists, try to speak the word.
+  if [[ ${is_speakable} = true && ${#meanings[@]} > 0 ]]; then
+    if [[ $(uname) =~ Darwin* ]]; then # macOS
+      say "${word}" 2> /dev/null
+    # Linux, BSD
+    elif hash spd-say 2> /dev/null; then
+      spd-say -t female1 "${word}" 2> /dev/null
+    elif hash espeak 2> /dev/null; then
+      espeak "${word}" 2> /dev/null
+    elif hash festival 2> /dev/null; then
+      echo "${word}" | festival --tts 2> /dev/null
+    fi
   fi
 }
 
